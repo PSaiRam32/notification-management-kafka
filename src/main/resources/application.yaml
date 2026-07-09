@@ -9,9 +9,9 @@ spring:
       recipient: sairam03feb2003@gmail.com
 
   datasource:
-    url: jdbc:mysql://localhost:3306/kafka_notify
-    username: root
-    password: 2000030757
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/kafka_notify
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -25,15 +25,15 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: sairam.paidipati32@gmail.com
-    password: oplj qscp xdst nwmk
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
 
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092,localhost:9094
+      bootstrap-servers: host.docker.internal:9092,host.docker.internal:9094
       group-id: notification-service-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 #      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer

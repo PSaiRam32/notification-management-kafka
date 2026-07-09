@@ -1,12 +1,11 @@
 package com.kafka.notification_service.Messaging.config;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import com.kafka.notification_service.Exception.NonRetryableException;
 import com.kafka.notification_service.Exception.RetryableException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.TopicPartition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,7 +42,7 @@ public class KafkaErrorHandlerConfig{
         DefaultErrorHandler errorHandler=new DefaultErrorHandler(recoverer,fixedBackOff);
         errorHandler.addRetryableExceptions(RetryableException.class,org.springframework.dao.DataAccessException.class);
         errorHandler.addNotRetryableExceptions(NonRetryableException.class,
-                JsonParseException.class,MismatchedInputException.class,
+                JsonParseException.class, MismatchedInputException.class,
                 InvalidFormatException.class,DeserializationException.class);
         return errorHandler;
     }
